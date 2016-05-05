@@ -8,9 +8,9 @@ class AppDelegate
     rootViewController.view.addSubview(@text_field)
     rootViewController.view.addSubview(@button)
 
-    navigationController = UINavigationController.alloc.initWithRootViewController(rootViewController)
+    @navigation_controller = UINavigationController.alloc.initWithRootViewController(rootViewController)
 
-    create_window(navigationController)
+    create_window(@navigation_controller)
 
     true
   end
@@ -57,6 +57,15 @@ class AppDelegate
   end
 
   def send_message
-    puts @text_field.text
+    another_controller = UIViewController.alloc.init
+    another_controller.title = "Another One"
+    another_controller.view.backgroundColor = UIColor.blueColor
+
+    another_view = UITextField.alloc.initWithFrame([[15, 80], [265, 40]])
+    another_view.text = @text_field.text
+    another_view.enabled = false
+    another_view.font = UIFont.systemFontOfSize(25)
+    another_controller.view.addSubview(another_view)
+    @navigation_controller.pushViewController(another_controller, animated: true)
   end
 end
